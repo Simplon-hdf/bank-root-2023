@@ -1,3 +1,6 @@
+# migration prisma
+/prisma/migrations
+
 # point env
 .env
 
