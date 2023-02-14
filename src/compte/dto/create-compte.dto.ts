@@ -23,5 +23,4 @@ export class CreateCompteDto {
     private admin: Admin;
 
     private transactions: Transaction[];
-    ``
 }
