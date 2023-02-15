@@ -9,7 +9,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Client {
+  uuid_client   String    @db.Uuid @default(uuid())
   id_client     Int       @id @default(autoincrement())
   lastname      String    @db.VarChar(50)
   firstname     String    @db.VarChar(50)
@@ -19,6 +21,7 @@ model Client {
 }
 
 model Account {
+  uuid_account   String       @db.Uuid @default(uuid())
   id_account     Int           @id @default(autoincrement())
   id_client      Int
   admin_id       Int
@@ -31,6 +34,7 @@ model Account {
 }
 
 model Transaction {
+  uuid_transaction String   @db.Uuid @default(uuid())
   id_transaction Int      @id @default(autoincrement())
   account_id     Int
   type           String   @db.VarChar(50)
@@ -40,6 +44,7 @@ model Transaction {
 }
 
 model Admin {
+  uuid_admin    String    @db.Uuid @default(uuid())
   id_admin      Int       @id @default(autoincrement())
   lastname      String    @db.VarChar(50)
   firstname     String    @db.VarChar(50)
