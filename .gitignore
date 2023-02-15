@@ -2,7 +2,9 @@
 /prisma/migrations
 
 # point env
+
 *.env
+
 
 # compiled output
 /dist
