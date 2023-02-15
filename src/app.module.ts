@@ -5,9 +5,10 @@ import { CompteModule } from './compte/compte.module';
 import { UsersModule } from './users/users.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { AdminModule } from './admin/admin.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [CompteModule, UsersModule, TransactionModule, AdminModule],
+  imports: [CompteModule, UsersModule, TransactionModule, AdminModule, PrismaModule],
   controllers: [AppController],
   providers: [AppService],
 })
