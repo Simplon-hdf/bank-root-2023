@@ -7,7 +7,7 @@ generator client {
 // database connection
 datasource db {
   provider = "postgresql"
-  url      = env("postgres://postgres:postgres@localhost:5432/bankroot")
+  url      = env("DATABASE-URL")
 }
 
 
