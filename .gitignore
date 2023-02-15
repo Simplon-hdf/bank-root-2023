@@ -1,5 +1,8 @@
+# migration
+/prisma/migrations
+
 # point env
-.env
+*.env
 
 # compiled output
 /dist
