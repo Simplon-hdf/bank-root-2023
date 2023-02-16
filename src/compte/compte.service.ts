@@ -9,16 +9,21 @@ export class CompteService {
   constructor(
     private readonly prisma: PrismaService){}
 
-  async create(data: Prisma.AccountCreateInput): Promise<Account> {
-    return this.prisma.account.create({ data });
+  async create(dto: CreateCompteDto): Promise<Account> {
+    const newAccount =  await this.prisma.account.create({
+      data:{ ...dto}
+    }); 
+    return newAccount;
   }
  
   findAll() {
     return this.prisma.account.findMany();
   }
 
-  async findOne(): Promise<Account> {
-    return this.prisma.account.findFirst();
+  async findOne(id: number): Promise<Account> {
+    return this.prisma.account.findFirst({
+      where: {id_account: id}
+    });
   }
 
   update(id: number, updateCompteDto: UpdateCompteDto) {

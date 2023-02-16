@@ -7,7 +7,7 @@ import { UpdateCompteDto } from './dto/update-compte.dto';
 export class CompteController {
   constructor(private readonly compteService: CompteService) {}
 
-  @Post()
+  @Post("create")
   create(@Body() createCompteDto: CreateCompteDto) {
     return this.compteService.create(createCompteDto);
   }
