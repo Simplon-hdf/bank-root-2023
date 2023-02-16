@@ -1,26 +1,34 @@
-import {Admin, Client, Transaction} from "@prisma/client";
-import {IsDate} from "class-validator";
+import {IsDate, IsString, IsNotEmpty, IsNumber} from "class-validator";
 
-const { String } = require('class-validator' );
 
 export class CreateCompteDto {
-    @String()
-    private idAccount: string;
-    @String()
-    private idAdmin: string;
-    @String()
-    private ccountNumber: string;
+    
+    @IsString()
+    @IsNotEmpty()
+    uuid_account: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    id_account: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+     admin_id: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+     account_number: number;
+    
     // Client
-    @String()
-    private idClient: string;
+    @IsNumber()
+    @IsNotEmpty()
+    id_client: number;
+
     @IsDate()
-    private createdAt: Date;
+    @IsNotEmpty()
+    created_at: Date;
+
     @IsDate()
-    private updatedAt: Date;
-
-    private client: Client;
-
-    private admin: Admin;
-
-    private transactions: Transaction[];
+    @IsNotEmpty()
+    updated_at: Date;
 }
