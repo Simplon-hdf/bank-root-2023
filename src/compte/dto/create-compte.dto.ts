@@ -1,34 +1,39 @@
-import {IsDate, IsString, IsNotEmpty, IsNumber} from "class-validator";
-
+import { IsDate, IsString, IsNotEmpty, IsNumber } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateCompteDto {
-    
-    @IsString()
-    @IsNotEmpty()
-    uuid_account: string;
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  uuid_account: string;
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  id_account: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    id_account: number;
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  admin_id: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-     admin_id: number;
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  account_number: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-     account_number: number;
-    
-    // Client
-    @IsNumber()
-    @IsNotEmpty()
-    id_client: number;
+  // Client
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  id_client: number;
 
-    @IsDate()
-    @IsNotEmpty()
-    created_at: Date;
+  @ApiProperty()
+  @IsDate()
+  @IsNotEmpty()
+  created_at: Date;
 
-    @IsDate()
-    @IsNotEmpty()
-    updated_at: Date;
+  @ApiProperty()
+  @IsDate()
+  @IsNotEmpty()
+  updated_at: Date;
 }
