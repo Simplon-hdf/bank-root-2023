@@ -6,7 +6,7 @@ import { CreateCompteDto } from "src/compte/dto/create-compte.dto";
 import { Account, Prisma } from "@prisma/client";
 
 
-async function isExist(id: number) {
+private async function isExist(id: number) {
     const accountNumber = await this.prisma.account.findOne({
         where: {
             id_account: id
@@ -23,14 +23,14 @@ async function isExist(id: number) {
     }
 }
 
-function isNotNullAndSuperior(accountSolde: number, sum: number) {
+private async function isNotNullAndSuperior(amount: number, sum: number) {
     // check if account is positive
     try {
-        if (accountSolde > 0 && accountSolde > sum) {
+        if (amount > 0 && amount > sum) {
             return true;
         }
     } catch (err) {
-        console.log(err.log("solde account not positive | not authorized"));
+        console.log(err.log("amount of account not positive or not authorized"));
         return false;
     }
 }
@@ -41,6 +41,8 @@ export class TransactionService {
     constructor(private readonly prisma: PrismaService) {}
   createDepot(createTransactionDto: CreateTransactionDto, sum: number) {
     const account = isExist(createTransactionDto.account_id);
+
+    // connexion
     return this.prisma.transaction.create({
         data: {
             uuid_transaction: createTransactionDto.uuid_transaction,
@@ -53,6 +55,7 @@ export class TransactionService {
         }
     });
   }
+
 
   createRetrait(createTransactionDto: CreateTransactionDto) {
     isNotNullAndSuperior(// solde du compte, somme);
