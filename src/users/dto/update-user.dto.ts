@@ -12,7 +12,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  firsname: string;
+  firstname: string;
 
   @ApiProperty()
   @IsString()
