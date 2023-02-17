@@ -10,9 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Client {
-  uuid_client   String    @db.Uuid @default(uuid())
+  uuid_client   String    @default(uuid()) @db.Uuid
   id_client     Int       @id @default(autoincrement())
   lastname      String    @db.VarChar(50)
   firstname     String    @db.VarChar(50)
@@ -22,11 +21,12 @@ model Client {
 }
 
 model Account {
-  uuid_account   String       @db.Uuid @default(uuid())
+  uuid_account   String        @default(uuid()) @db.Uuid
   id_account     Int           @id @default(autoincrement())
   id_client      Int
   admin_id       Int
   account_number Int
+  balance        Int
   created_at     DateTime      @default(now())
   updated_at     DateTime      @default(now())
   client         Client        @relation(fields: [id_client], references: [id_client])
@@ -35,17 +35,18 @@ model Account {
 }
 
 model Transaction {
-  uuid_transaction String   @db.Uuid @default(uuid())
-  id_transaction Int      @id @default(autoincrement())
-  account_id     Int
-  type           String   @db.VarChar(50)
-  created_at     DateTime @default(now())
-  updated_at     DateTime @default(now())
-  account        Account  @relation(fields: [account_id], references: [id_account])
+  uuid_transaction String   @default(uuid()) @db.Uuid
+  id_transaction   Int      @id @default(autoincrement())
+  account_id       Int
+  amount           Int
+  type             String   @db.VarChar(50)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now())
+  account          Account  @relation(fields: [account_id], references: [id_account])
 }
 
 model Admin {
-  uuid_admin    String    @db.Uuid @default(uuid())
+  uuid_admin    String    @default(uuid()) @db.Uuid
   id_admin      Int       @id @default(autoincrement())
   lastname      String    @db.VarChar(50)
   firstname     String    @db.VarChar(50)
@@ -53,4 +54,3 @@ model Admin {
   password      String    @db.VarChar(250)
   account       Account[]
 }
-
