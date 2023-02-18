@@ -2,6 +2,12 @@ import { IsDate, IsString, IsNotEmpty, IsNumber } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateCompteDto {
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  balance: number;
+
   @ApiProperty()
   @IsString()
   @IsNotEmpty()

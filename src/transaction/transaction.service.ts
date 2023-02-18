@@ -3,10 +3,10 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateCompteDto } from "src/compte/dto/create-compte.dto";
-import { Account, Prisma } from "@prisma/client";
+import {Account, Prisma, Transaction} from "@prisma/client";
 
 
-private async function isExist(id: number) {
+async function isExist(id: number) {
     const accountNumber = await this.prisma.account.findOne({
         where: {
             id_account: id
@@ -23,7 +23,7 @@ private async function isExist(id: number) {
     }
 }
 
-private async function isNotNullAndSuperior(amount: number, sum: number) {
+async function isNotNullAndSuperior(amount: number, sum: number) {
     // check if account is positive
     try {
         if (amount > 0 && amount > sum) {
@@ -39,20 +39,15 @@ private async function isNotNullAndSuperior(amount: number, sum: number) {
 export class TransactionService {
 
     constructor(private readonly prisma: PrismaService) {}
-  createDepot(createTransactionDto: CreateTransactionDto, sum: number) {
-    const account = isExist(createTransactionDto.account_id);
+  async createDepot(createTransactionDto: CreateTransactionDto, sum: number): Promise<Transaction>{
+    const account = await (createTransactionDto.account_id);
 
-    // connexion
-    return this.prisma.transaction.create({
+      return this.prisma.transaction.create({
         data: {
-            uuid_transaction: createTransactionDto.uuid_transaction,
-            id_transaction: createTransactionDto.id_transaction,
-            account_id: createTransactionDto.account_id,
-            type: createTransactionDto.type,
-            created_at: createTransactionDto.created_at,
-
-            // ajouter la somme
+            amount: sum,
+            created_at: new Date(Date.now()),
         }
+
     });
   }
 
